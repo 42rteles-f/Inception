@@ -1,0 +1,1 @@
+Many daemon-based applications provide an option to run in the foreground, such as nginx -g 'daemon off;' or mysqld --console
