@@ -1,0 +1,13 @@
+services:
+
+  mariadb:
+    container_name: 
+    build:
+    image: 
+    restart:
+    volumes:
+      -
+    env_file:
+      - 
+    networks:
+      - 

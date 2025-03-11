@@ -23,3 +23,28 @@ wil’s website
 Your NGINX container must be the only entrypoint into your
 infrastructure via the port 443 only, using the TLSv1.2 or TLSv1.3
 protocol
+
+Debian because
+Better compatibility: Uses glibc, which is required by many software libraries
+Comes with a more complete Linux environment
+
+ a network is a virtual environment that allows containers to communicate with each other
+ Docker deletes all networks that are not in use. This means:
+
+The virtual network configuration is erased.
+Any network-specific routing rules inside Docker disappear.
+Containers that were using that network (if any) can no longer communicate through it.
+
+"
+virtual meeting room:
+
+You create a meeting room (Docker network).
+People (containers) can enter and communicate.
+If the room is empty and unused, you can delete the room (remove the network).
+The people (containers) still exist, but they no longer have that specific meeting space
+"
+Docker does not remove the default networks:
+
+bridge – The default network for new containers.
+host – Binds containers directly to the host network.
+none – A special network with no communication
