@@ -1,7 +1,6 @@
 FROM debian:bullseye
 
 RUN apt-get update -y &&\
-	apt-get upgrade -y &&\
 	apt-get install php php7.4-fpm curl php-mysql mariadb-client -y
 # Installs the default PHP version available in the repository.
 # php7.4-fpm → Installs PHP 7.4 with FastCGI Process Manager (FPM). This is used to handle PHP requests efficiently, typically in an Nginx or Apache setup.
