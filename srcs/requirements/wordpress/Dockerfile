@@ -1,6 +1,8 @@
 FROM debian:bullseye
 
-RUN apt-get update -y && apt-get upgrade -y && apt-get install php php7.4-fpm curl php-mysql mariadb-client netcat -y
+RUN apt-get update -y &&\
+	apt-get upgrade -y &&\
+	apt-get install php php7.4-fpm curl php-mysql mariadb-client -y
 # Installs the default PHP version available in the repository.
 # php7.4-fpm → Installs PHP 7.4 with FastCGI Process Manager (FPM). This is used to handle PHP requests efficiently, typically in an Nginx or Apache setup.
 # curl → A command-line tool used for making HTTP requests, often required for scripts that interact with APIs or external resources.
@@ -11,8 +13,8 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install php php7.4-fpm cu
 
 RUN mkdir -p /var/www/wordpress
 
-COPY ./conf/wp-conf.sh /
+COPY ./conf/wordpress-conf.sh ./
 
-RUN chmod +x /wp-conf.sh
+RUN chmod +x /wordpress-conf.sh
 
-ENTRYPOINT [ "./wp-conf.sh" ]
+ENTRYPOINT [ "./wordpress-conf.sh" ]
