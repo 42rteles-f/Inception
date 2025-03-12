@@ -40,8 +40,8 @@ services:
   nginx:
     container_name: nginx
     ports:
-      - "8080:8080"
       - "443:443"
+      # - "80:80"
     build: ./requirements/nginx
     image: nginx:inception
     restart: always 
