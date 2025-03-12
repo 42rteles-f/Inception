@@ -48,3 +48,9 @@ Docker does not remove the default networks:
 bridge – The default network for new containers.
 host – Binds containers directly to the host network.
 none – A special network with no communication
+
+Fast Common Gateway Interface
+Faster Performance – Reuses existing processes instead of creating new ones for every request.
+✅ Lower Resource Usage – Uses fewer system resources than traditional CGI.
+✅ Scalability – Can handle multiple concurrent requests efficiently.
+✅ Improved Security – Can run under different users and isolate processes

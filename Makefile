@@ -1,42 +1,32 @@
-all: volumes
+COLOR_RESET =	\033[0m
+COLOR_GREEN =	\033[32m
+
+# /data/ folder for (Data Persistence), and (Docker Volume Binding)
+all:
+	@mkdir -p $$HOME/data/wordpress/;
+	@mkdir -p $$HOME/data/mariadb/;
+	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Created /data/"
 	@docker compose -f ./srcs/docker-compose.yml up -d --build
+	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Compose Up"
 
 down:
 	@docker compose -f ./srcs/docker-compose.yml down
+	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Compose Down"
 
 re: fclean all
 
-volumes:
-	mkdir -p $$HOME/data/wordpress/;
-	mkdir -p $$HOME/data/mariadb/;
-
 fclean: clean
 	- sudo rm -rf $$HOME/data;
-
-env:
-	@touch .env
-	@cat << EOF > .env
-DATABASE_USER=inceptionuser
-DATABASE_PASSWORD=inceptionpassword
-DATABASE_NAME=inceptiondatabase
-DATABASE_HOST=mariadb
-DATABASE_PORT=3306
-
-DOMAIN=rteles-f.42.fr
-
-BACKEND_ADMIN=mad-rteles-f
-BACKEND_ADMIN_PASSWORD=mad-rteles-f
-BACKEND_ADMIN_EMAIL=mad-rteles-f@example.com
-BACKEND_USER=rteles-f
-BACKEND_USER_PASSWORD=rteles-f
-BACKEND_USER_EMAIL=rteles-f@example.com
-EOF
-
+	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Removed /data/"
 
 clean:
-	- docker stop $$(docker ps -a -q)
-	- docker rm $$(docker ps -a -q)
-	- docker rmi $$(docker images -q)
-	- docker volume rm $$(docker volume ls -q)
-	- docker network rm $$(docker network ls -q)
-	- docker system prune -a -f
+	- docker rm -f $$(docker ps -aq)
+	- docker system prune -a -f --volumes
+	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Docker Clean"
+
+# docker ps: List running containers
+# 	-a: List all containers
+#	-q: Quiet Mode, list only the ID's
+
+# docker rm -f: force stops and removes all containers
+# docker system prune -a -f --volumes: Removes all unused containers, images, networks, build cache and volumes.

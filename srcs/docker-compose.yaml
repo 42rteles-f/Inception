@@ -1,13 +1,71 @@
 services:
 
   mariadb:
-    container_name: 
-    build:
-    image: 
-    restart:
+    container_name: mariadb
+    build: ./requirements/mariadb/
+    image: mariadb:inception
+    restart: always 
     volumes:
-      -
+      - mariadb:/var/lib/mysql
     env_file:
-      - 
+      - ./requirements/mariadb/config/.mariadb.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 3
+      timeout: 5s
     networks:
-      - 
+      - inception
+
+# Assigns a custom name (wordpress) to the container instead of a random one
+# Specifies the Dockerfile directory to build the image
+# Assigns a custom name (wordpress:inception) to the image after building it
+# Maps the path "/var/www/wordpress" inside the container to the same location
+# as the local directory defined below
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    image: wordpress:inception
+    restart: always 
+    volumes:
+      - wordpress:/var/www/wordpress
+    env_file:
+      ./requirements/wordpress/config/.wordpress.env
+    depends_on: 
+      mariadb:
+        condition: service_healthy
+    networks:
+      - inception_net
+
+  nginx:
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    build: ./requirements/nginx
+    image: nginx:inception
+    restart: always 
+    volumes:
+      - wordpress:/var/www/wordpress
+    depends_on:
+      - wordpress
+    networks:
+      - inception_net
+
+volumes:
+  mariadb:
+    name: mariadb_data
+    driver: local
+    driver_opts:
+      o: bind
+      device: ${HOME}/data/mariadb
+  wordpress:
+    name: wordpress_data
+    driver: local
+    driver_opts:
+      o: bind
+      device: ${HOME}/data/wordpress
+
+networks:
+  inception:
+    name: inception_net
