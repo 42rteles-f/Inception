@@ -8,14 +8,14 @@ services:
     volumes:
       - mariadb:/var/lib/mysql
     env_file:
-      - ./requirements/mariadb/config/.mariadb.env
+      - .env
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
       retries: 3
       timeout: 5s
     networks:
-      - inception
+      - inception_net
 
 # Assigns a custom name (wordpress) to the container instead of a random one
 # Specifies the Dockerfile directory to build the image
@@ -30,7 +30,7 @@ services:
     volumes:
       - wordpress:/var/www/wordpress
     env_file:
-      ./requirements/wordpress/config/.wordpress.env
+      .env
     depends_on: 
       mariadb:
         condition: service_healthy
@@ -40,7 +40,7 @@ services:
   nginx:
     container_name: nginx
     ports:
-      - "80:80"
+      - "8080:8080"
       - "443:443"
     build: ./requirements/nginx
     image: nginx:inception
@@ -58,14 +58,16 @@ volumes:
     driver: local
     driver_opts:
       o: bind
+      type: none
       device: ${HOME}/data/mariadb
   wordpress:
     name: wordpress_data
     driver: local
     driver_opts:
       o: bind
+      type: none
       device: ${HOME}/data/wordpress
 
 networks:
-  inception:
+  inception_net:
     name: inception_net
