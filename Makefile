@@ -6,11 +6,11 @@ all:
 	@mkdir -p $$HOME/data/wordpress/;
 	@mkdir -p $$HOME/data/mariadb/;
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Created /data/"
-	@docker compose -f ./srcs/docker-compose.yaml up -d --build
+	@docker-compose -f ./srcs/docker-compose.yaml up -d --build
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Compose Up"
 
 down:
-	@docker compose -f ./srcs/docker-compose.yaml down
+	@docker-compose -f ./srcs/docker-compose.yaml down
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Compose Down"
 
 re: fclean all
