@@ -12,7 +12,7 @@ RUN apt-get update -y && \
 
 RUN mkdir -p /var/www/wordpress
 
-COPY ./config/wordpress-conf.sh ./
+COPY ./config/wordpress-conf.sh /
 
 RUN chmod +x /wordpress-conf.sh && \
 	sh -c /wordpress-conf.sh
