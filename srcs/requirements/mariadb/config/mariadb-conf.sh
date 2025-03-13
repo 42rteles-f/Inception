@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
-if [ -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
-	echo "enter if $?" >> output.txt
-	exit 0;	
-fi
+# if [ -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
+# 	echo "enter if $?" >> output.txt
+# 	exit 0;	
+# fi
 
 service mariadb start
 
