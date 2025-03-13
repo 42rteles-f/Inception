@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+exec > /dev/null
+
 if [ ! -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
 	
 	# Initializes the mariadb and waits 5 seconds to let the service load up.
