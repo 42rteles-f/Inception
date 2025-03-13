@@ -20,7 +20,7 @@ fclean: clean
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Removed /data/"
 
 clean:
-	@docker rm -f $$(docker ps -aq)
+	@docker rm -f $$(docker ps -aq) > /dev/null
 	@docker system prune -a -f --volumes > /dev/null
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Docker Clean"
 
