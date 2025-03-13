@@ -5,6 +5,7 @@ if [ -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
 fi
 
 service mariadb start
+sleep 5
 
 mariadb -u root -e "
 	CREATE DATABASE IF NOT EXISTS ${DATABASE_NAME};
