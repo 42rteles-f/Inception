@@ -22,7 +22,7 @@ fclean: clean
 clean:
 	@if [ -n "$$(docker ps -aq)" ]; then docker rm -f $$(docker ps -aq) > /dev/null; fi
 	@docker system prune -a -f --volumes > /dev/null
-	@@if [ -n "$$(docker volume ls -q)" ]; then docker volume rm $$(docker volume ls -q); fi
+	@@if [ -n "$$(docker volume ls -q)" ]; then docker volume rm $$(docker volume ls -q) > /dev/null; fi
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Docker Clean"
 
 # docker ps: List running containers
