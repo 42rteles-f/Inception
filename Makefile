@@ -10,7 +10,7 @@ all:
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Compose Up"
 
 down:
-	@docker-compose -f ./srcs/docker-compose.yaml down
+	@docker-compose -f ./srcs/docker-compose.yaml down > /dev/null
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Compose Down"
 
 re: fclean all
@@ -21,7 +21,7 @@ fclean: clean
 
 clean:
 	@docker rm -f $$(docker ps -aq)
-	@docker system prune -a -f --volumes
+	@docker system prune -a -f --volumes > /dev/null
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Docker Clean"
 
 # docker ps: List running containers
