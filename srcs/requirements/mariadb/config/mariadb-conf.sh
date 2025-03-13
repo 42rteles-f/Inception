@@ -14,4 +14,10 @@ mariadb -u root -e "
 	FLUSH PRIVILEGES;
 "
 
+if [ $status -eq 0 ]; then
+    echo "✅ Success! Exit code: $status" >> dbanswer
+else
+    echo "❌ Error! Exit code: $status" >> dbanswer
+fi
+
 service mariadb stop
