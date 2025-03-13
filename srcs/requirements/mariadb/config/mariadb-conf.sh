@@ -7,8 +7,8 @@ if [ ! -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
 		CREATE DATABASE IF NOT EXISTS ${DATABASE_NAME};
 		CREATE USER IF NOT EXISTS '${DATABASE_USER}'@'%' IDENTIFIED BY '${DATABASE_PASS}';
 		GRANT ALL PRIVILEGES ON ${DATABASE_NAME}.* TO '${DATABASE_USER}'@'%';
-		ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'rootpass';
-		ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'rootpass';
+		ALTER USER 'root'@'localhost' IDENTIFIED BY 'rootpass';
+		ALTER USER 'root'@'%' IDENTIFIED BY 'rootpass';
 		FLUSH PRIVILEGES;
 	"
 
