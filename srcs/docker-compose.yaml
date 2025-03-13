@@ -61,14 +61,14 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: ${HOME}/data/mariadb
+      device: /home/rteles-f/data/mariadb
   wordpress:
     name: wordpress_data
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: ${HOME}/data/wordpress
+      device: /home/rteles-f/data/wordpress
 
 networks:
   inception_net:
