@@ -14,6 +14,7 @@ RUN mkdir -p /var/www/wordpress
 
 COPY ./config/wordpress-conf.sh ./
 
-RUN chmod +x /wordpress-conf.sh
+RUN chmod +x /wordpress-conf.sh && \
+	sh -c /wordpress-conf.sh
 
-ENTRYPOINT [ "./wordpress-conf.sh" ]
+CMD ["php-fpm7.4 -F"]

@@ -26,4 +26,3 @@ echo "WordPress is installed."
 
 sed -i '36 s@/run/php/php7.4-fpm.sock@9000@' /etc/php/7.4/fpm/pool.d/www.conf
 mkdir -p /run/php
-/usr/sbin/php-fpm7.4 -F

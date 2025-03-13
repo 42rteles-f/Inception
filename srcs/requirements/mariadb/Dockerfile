@@ -5,6 +5,7 @@ RUN apt-get update -y && \
 
 COPY ./config/mariadb-conf.sh ./
 
-RUN chmod +x /mariadb-conf.sh
+RUN chmod +x /mariadb-conf.sh && \
+    sh -c ./mariadb-conf.sh
 
-ENTRYPOINT [ "./mariadb-conf.sh" ]
+CMD ["mysqld_safe", "--bind-address=0.0.0.0", "--port=3306", "--socket=/run/mysqld/mysqld.sock"]
