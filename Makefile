@@ -6,7 +6,7 @@ all:
 	@mkdir -p $$HOME/data/wordpress/;
 	@mkdir -p $$HOME/data/mariadb/;
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Created /data/"
-	@docker-compose -f ./srcs/docker-compose.yaml up -d --build > /dev/null
+	@docker compose -f ./srcs/docker-compose.yaml up -d --build > /dev/null
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Compose Up"
 
 down:
@@ -20,7 +20,7 @@ fclean: clean
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Removed /data/"
 
 clean:
-	@docker rm -f $$(docker ps -aq) > /dev/null
+	if (docker ps -aq); then @docker rm -f $$(docker ps -aq) > /dev/null
 	@docker system prune -a -f --volumes > /dev/null
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Docker Clean"
 
