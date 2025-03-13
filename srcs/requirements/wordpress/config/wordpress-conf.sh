@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-
+sleep 10
 set -e
 
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
