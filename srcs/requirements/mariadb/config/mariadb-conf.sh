@@ -2,7 +2,7 @@
 
 if [ ! -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
 	service mariadb start
-
+	sleep 5
 	mariadb -u root -e "
 		CREATE DATABASE IF NOT EXISTS ${DATABASE_NAME};
 		CREATE USER IF NOT EXISTS '${DATABASE_USER}'@'%' IDENTIFIED BY '${DATABASE_PASS}';
