@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 if [ -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
 	exit 0;	
