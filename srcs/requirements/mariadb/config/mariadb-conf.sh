@@ -13,9 +13,9 @@ GRANT ALL PRIVILEGES ON ${DATABASE_NAME}.* TO '${DATABASE_USER}'@'%';
 FLUSH PRIVILEGES;"
 
 if [ $? -eq 0 ]; then
-    echo "✅ Database and user were successfully created!"
+    echo "✅ Database and user were successfully created!" > dbanswer
 else
-    echo "❌ Error: Failed to create database/user!"
+    echo "❌ Error: Failed to create database/user!" > dbanswer
 fi
 
 service mariadb stop
