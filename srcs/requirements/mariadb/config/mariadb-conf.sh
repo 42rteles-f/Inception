@@ -6,12 +6,11 @@ fi
 
 service mariadb start
 
-mariadb -u root << EOF
+mariadb -u root -e "
 CREATE DATABASE IF NOT EXISTS ${DATABASE_NAME};
 CREATE USER IF NOT EXISTS '${DATABASE_USER}'@'%' IDENTIFIED BY '${DATABASE_PASS}';
 GRANT ALL PRIVILEGES ON ${DATABASE_NAME}.* TO '${DATABASE_USER}'@'%';
-FLUSH PRIVILEGES;
-EOF
+FLUSH PRIVILEGES;"
 
 if [ $? -eq 0 ]; then
     echo "✅ Database and user were successfully created!"
