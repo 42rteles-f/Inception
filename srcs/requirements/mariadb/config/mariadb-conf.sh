@@ -1,16 +1,16 @@
 #! /usr/bin/env bash
 
-if [ -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
-	exit 0;	
+if [ ! -d "/var/lib/mysql/${DATABASE_NAME}" ]; then
+	service mariadb start
+
+	mariadb -u root -e "
+		CREATE DATABASE IF NOT EXISTS ${DATABASE_NAME};
+		CREATE USER IF NOT EXISTS '${DATABASE_USER}'@'%' IDENTIFIED BY '${DATABASE_PASS}';
+		GRANT ALL PRIVILEGES ON ${DATABASE_NAME}.* TO '${DATABASE_USER}'@'%';
+		FLUSH PRIVILEGES;
+	"
+
+	service mariadb stop
 fi
 
-service mariadb start
-
-mariadb -u root -e "
-	CREATE DATABASE IF NOT EXISTS ${DATABASE_NAME};
-	CREATE USER IF NOT EXISTS '${DATABASE_USER}'@'%' IDENTIFIED BY '${DATABASE_PASS}';
-	GRANT ALL PRIVILEGES ON ${DATABASE_NAME}.* TO '${DATABASE_USER}'@'%';
-	FLUSH PRIVILEGES;
-"
-
-service mariadb stop
+exec mysqld_safe --bind-address=0.0.0.0 --port=3306 --socket=/run/mysqld/mysqld.sock
