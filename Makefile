@@ -3,8 +3,8 @@ COLOR_GREEN =	\033[32m
 
 # /data/ folder for (Data Persistence), and (Docker Volume Binding)
 all:
-	@mkdir -p $$HOME/data/wordpress/;
-	@mkdir -p $$HOME/data/mariadb/;
+	@mkdir -p /home/rteles-f/data/wordpress/;
+	@mkdir -p /home/rteles-f/data/mariadb/;
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Created /data/"
 	@docker-compose -f ./srcs/docker-compose.yaml up -d --build > /dev/null
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Compose Up"
@@ -16,7 +16,7 @@ down:
 re: fclean all
 
 fclean: clean
-	@sudo rm -rf $$HOME/data;
+	@sudo rm -rf /home/rteles-f/data;
 	@echo "[$(COLOR_GREEN)info$(COLOR_RESET)]: Removed /data/"
 
 clean:
